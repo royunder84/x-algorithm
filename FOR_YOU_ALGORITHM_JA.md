@@ -9,18 +9,18 @@
 
 ```mermaid
 flowchart TD
-    A[ユーザーがFor Youをリクエスト] --> B[Home MixerでQuery Hydration<br/>ユーザー文脈を補完]
-    B --> C1[Thunder<br/>In-Network候補]
-    B --> C2[Phoenix Retrieval<br/>Out-of-Network候補]
-    C1 --> D[候補を統合]
+    A["ユーザーが For You をリクエスト"] --> B["Home Mixer で Query Hydration<br/>ユーザー文脈を補完"]
+    B --> C1["Thunder<br/>In-Network 候補"]
+    B --> C2["Phoenix Retrieval<br/>Out-of-Network 候補"]
+    C1 --> D["候補を統合"]
     C2 --> D
-    D --> E[Candidate Hydration<br/>著者・メタ情報・動画長など付与]
-    E --> F[Pre-Scoring Filters<br/>重複/古すぎる/ミュート対象など除外]
-    F --> G[Scoring<br/>Phoenix予測 + 重み付け + 多様性補正]
-    G --> H[Selection<br/>Top-K選択]
-    H --> I[Post-Selection Filters<br/>可視性/安全性フィルタ]
-    I --> J[最終フィード返却]
-    H --> K[Side Effects<br/>ログ・履歴更新・キャッシュ]
+    D --> E["Candidate Hydration<br/>著者・メタ情報・動画長など付与"]
+    E --> F["Pre-Scoring Filters<br/>重複・古い候補・ミュート対象など除外"]
+    F --> G["Scoring<br/>Phoenix 予測 + 重み付け + 多様性補正"]
+    G --> H["Selection<br/>Top-K 選択"]
+    H --> I["Post-Selection Filters<br/>可視性・安全性フィルタ"]
+    I --> J["最終フィード返却"]
+    H --> K["Side Effects<br/>ログ・履歴更新・キャッシュ"]
 ```
 
 ---
@@ -29,11 +29,11 @@ flowchart TD
 
 ```mermaid
 flowchart LR
-    A[候補投稿] --> B[Phoenixが行動確率を予測<br/>like/reply/repost/click/...]
-    B --> C[重み付き合成<br/>Final = Σ weight × P(action)]
-    C --> D[著者多様性補正<br/>同一著者の連続露出を減衰]
-    D --> E[OON補正<br/>Out-of-Network係数調整]
-    E --> F[最終スコア]
+    A["候補投稿"] --> B["Phoenix が行動確率を予測<br/>like・reply・repost・click など"]
+    B --> C["重み付き合成<br/>Final = sum(weight * P(action))"]
+    C --> D["著者多様性補正<br/>同一著者の連続露出を減衰"]
+    D --> E["OON 補正<br/>Out-of-Network 係数調整"]
+    E --> F["最終スコア"]
 ```
 
 - 正の行動（like/repost など）は加点方向
@@ -46,18 +46,18 @@ flowchart LR
 
 ```mermaid
 flowchart TB
-    HM[Home Mixer] --> CP[Candidate Pipeline]
-    CP --> QH[Query Hydrators]
-    CP --> S[Sources]
-    CP --> H[Hydrators]
-    CP --> F[Filters]
-    CP --> SC[Scorers]
-    CP --> SEL[Selector]
-    CP --> PSF[Post-Selection Filters]
-    CP --> SE[Side Effects]
+    HM["Home Mixer"] --> CP["Candidate Pipeline"]
+    CP --> QH["Query Hydrators"]
+    CP --> S["Sources"]
+    CP --> H["Hydrators"]
+    CP --> F["Filters"]
+    CP --> SC["Scorers"]
+    CP --> SEL["Selector"]
+    CP --> PSF["Post-Selection Filters"]
+    CP --> SE["Side Effects"]
 
-    S --> T[Thunder]
-    S --> PR[Phoenix Retrieval]
+    S --> T["Thunder"]
+    S --> PR["Phoenix Retrieval"]
 ```
 
 - **Home Mixer**: 全体オーケストレーション
