@@ -77,4 +77,3 @@ flowchart TB
 6. Selection（Top-K）  
 7. Post-Selection Filtering  
 8. Side Effects（履歴/ログ更新）
-
